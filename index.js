@@ -7,7 +7,7 @@ const restify = require('restify');
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const { BotFrameworkAdapter } = require('botbuilder');
+const { BotFrameworkAdapter, UserState, MemoryStorage } = require('botbuilder');
 
 // Import required bot configuration.
 const { BotConfiguration } = require('botframework-config');
@@ -69,8 +69,33 @@ adapter.onTurnError = async (context, error) => {
     await context.sendActivity(`Oops. Something went wrong!`);
 };
 
+// Define a state store for your bot. See https://aka.ms/about-bot-state to learn more about using MemoryStorage.
+// A bot requires a state store to persist the dialog and user state between messages.
+let userState;
+
+// For local development, in-memory storage is used.
+// CAUTION: The Memory Storage used here is for local bot debugging only. When the bot
+// is restarted, anything stored in memory will be gone.
+const memoryStorage = new MemoryStorage();
+userState = new UserState(memoryStorage);
+
+// CAUTION: You must ensure your product environment has the NODE_ENV set
+//          to use the Azure Blob storage or Azure Cosmos DB providers.
+// const { BlobStorage } = require('botbuilder-azure');
+// Storage configuration name or ID from .bot file
+// const STORAGE_CONFIGURATION_ID = '<STORAGE-NAME-OR-ID-FROM-BOT-FILE>';
+// // Default container name
+// const DEFAULT_BOT_CONTAINER = '<DEFAULT-CONTAINER>';
+// // Get service configuration
+// const blobStorageConfig = botConfig.findServiceByNameOrId(STORAGE_CONFIGURATION_ID);
+// const blobStorage = new BlobStorage({
+//     containerName: (blobStorageConfig.container || DEFAULT_BOT_CONTAINER),
+//     storageAccountOrConnectionString: blobStorageConfig.connectionString,
+// });
+// userState = new userState(blobStorage);
+
 // Create the main dialog.
-const myBot = new MyBot();
+const myBot = new MyBot(userState);
 
 // Listen for incoming requests.
 server.post('/api/messages', (req, res) => {
