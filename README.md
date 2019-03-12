@@ -1,7 +1,9 @@
-# my-chat-bot
-Demonstrate the core capabilities of the Microsoft Bot Framework
+# subject-finder-bot
+Finds information about a subject available at the [State University of Campinas (Unicamp)][12] by its code name.
 
-This bot has been created using [Bot Framework][1], it shows how to create a simple bot that accepts input from the user and echoes it back.
+This bot has been created using [Bot Framework][1], and it currently fetches the subject name and the subject description provided by the Academic Directory (DAC) of Unicamp when the user inputs a subject code name (such as MC102) and text it back to the user. So far, it only fetches subjects taught at the Computing Institute.
+
+This bot started being developed as part of a Hackathon event made by Microsoft on March 11th, 2019 that took place in Unicamp.
 
 ## Prerequisites
 - [Node.js][4] version 8.5 or higher
@@ -27,8 +29,8 @@ This bot has been created using [Bot Framework][1], it shows how to create a sim
 ## Connect to the bot using Bot Framework Emulator **v4**
 - Launch Bot Framework Emulator
 - File -> Open Bot Configuration
-- Navigate to `my-chat-bot` folder
-- Select `my-chat-bot.bot` file
+- Navigate to `subject-finder-bot` folder
+- Select `subject-finder.bot` file
 
 # Deploy the bot to Azure
 
@@ -83,6 +85,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure][40]
 [9]: https://github.com/Microsoft/botbuilder-tools/tree/master/packages/MSBot
 [10]: https://portal.azure.com
 [11]: https://www.luis.ai
+[12]: https://www.unicamp.br/
 [20]: https://docs.botframework.com
 [21]: https://docs.microsoft.com/en-us/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0
 [22]: https://docs.microsoft.com/en-us/azure/bot-service/?view=azure-bot-service-4.0
